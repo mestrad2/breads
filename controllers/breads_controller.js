@@ -1,7 +1,7 @@
 const express = require('express')
 const breads = express.Router()
-const Bread = require('../models/bread.js')
-const Baker = require('../models/baker.js')
+const Bread = require('../models/bread')
+const Baker = require('../models/baker')
 
 // INDEX
 breads.get('/', async (req, res) => {
@@ -13,9 +13,8 @@ breads.get('/', async (req, res) => {
     bakers: foundBakers,
     title: 'Index Page'
   })
+
 })
-
-
 
 // NEW
 breads.get('/new', (req, res) => {
@@ -27,7 +26,7 @@ breads.get('/new', (req, res) => {
     })
 })
 
-// EDIT
+//EDIT
 breads.get('/:id/edit', (req, res) => {
   Baker.find().then(foundBakers => {
     Bread.findById(req.params.id)
@@ -53,8 +52,7 @@ breads.get('/:id', (req, res) => {
     })
 })
 
-
-// DELETE
+//DELETE
 breads.delete('/:id', (req, res) => {
   Bread.findByIdAndDelete(req.params.id)
     .then(deletedBread => {
@@ -62,7 +60,6 @@ breads.delete('/:id', (req, res) => {
     })
 })
 
-// UPDATE
 breads.put('/:id', (req, res) => {
   if (req.body.hasGluten === 'on') {
     req.body.hasGluten = true
@@ -76,12 +73,12 @@ breads.put('/:id', (req, res) => {
     })
 })
 
-// CREATE
+//CREATE
 breads.post('/', (req, res) => {
-  if(!req.body.image) {
-      req.body.image = undefined 
+  if (!req.body.image) {
+    req.body.image = undefined
   }
-  if(req.body.hasGluten === 'on') {
+  if (req.body.hasGluten === 'on') {
     req.body.hasGluten = true
   } else {
     req.body.hasGluten = false
