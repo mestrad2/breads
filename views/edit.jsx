@@ -1,4 +1,5 @@
 const React = require('react')
+const baker = require('../controllers/bakers_controller')
 const Default = require('./layouts/Default')
 
 function Edit({ bread, bakers }) {
@@ -30,12 +31,6 @@ function Edit({ bread, bakers }) {
             )
           })}
 
-          {/* <option value="Rachel">Rachel</option>
-          <option value="Monica">Monica</option>
-          <option value="Joey">Joey</option>
-          <option value="Chandler">Chandler</option>
-          <option value="Ross">Ross</option>
-          <option value="Phoebe">Phoebe</option> */}
         </select>
 
 
