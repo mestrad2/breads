@@ -1,13 +1,16 @@
 // DEPENDENCIES 
 const express = require('express')
+const app = express()
 const methodOverride = require('method-override')
 const mongoose = require('mongoose')
-
 
 // CONFIGURATION
 require('dotenv').config()
 const PORT = process.env.PORT
-const app = express()
+
+app.get('/', (req,res) => {
+  res.send('Welcome to an Awesome App about Breads!')
+})
 
 // MONGODB CONNECTION
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
@@ -22,12 +25,8 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 
-// ROUTES
-app.get('/', (req,res) => {
-  res.send('Welcome to an Awesome App about Breads!')
-})
 
-// Breads
+// BREADS
 const breadsController = require('./controllers/breads_controller.js')
 app.use('/breads', breadsController)
 
